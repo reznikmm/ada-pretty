@@ -1,4 +1,4 @@
-package body Ada_Outputs.Statements is
+package body Ada_Pretty.Statements is
 
    --------------
    -- Document --
@@ -245,4 +245,4 @@ package body Ada_Outputs.Statements is
       return Statement'(Expression => Expression);
    end New_Statement;
 
-end Ada_Outputs.Statements;
+end Ada_Pretty.Statements;

@@ -1,4 +1,4 @@
-package body Ada_Outputs.Expressions is
+package body Ada_Pretty.Expressions is
 
    --------------
    -- Document --
@@ -320,4 +320,4 @@ package body Ada_Outputs.Expressions is
       return String'(Text => Text);
    end New_String;
 
-end Ada_Outputs.Expressions;
+end Ada_Pretty.Expressions;

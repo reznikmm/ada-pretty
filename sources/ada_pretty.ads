@@ -2,7 +2,7 @@ with League.String_Vectors;
 with League.Strings;
 private with League.Pretty_Printers;
 
-package Ada_Outputs is
+package Ada_Pretty is
 
    type Node is abstract tagged private;
    type Node_Access is access constant Node'Class;
@@ -299,4 +299,4 @@ private
      Printer : not null access League.Pretty_Printers.Printer'Class)
       return League.Pretty_Printers.Document;
 
-end Ada_Outputs;
+end Ada_Pretty;

@@ -1,13 +1,11 @@
 with "matreshka_league";
 
-with "config";
+with "ada_pretty";
 
-project Ada_Output is
+project Ada_Pretty_Test is
 
-   for Source_Dirs use
-    (Config.Root_Source_Dir & "/sources/output");
-   for Object_Dir use Config.Root_Build_Dir & "/.objs";
-   for Exec_Dir use Config.Root_Build_Dir & "/bin";
+   for Source_Dirs use ("../tests");
+   for Object_Dir use "../.objs";
    for Main use ("ada_output_test.adb");
 
    package Binder is
@@ -18,4 +16,4 @@ project Ada_Output is
       for Switches ("Ada") use ("-g", "-gnatyyo", "-gnatwae");
    end Compiler;
 
-end Ada_Output;
+end Ada_Pretty_Test;

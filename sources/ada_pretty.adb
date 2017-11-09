@@ -1,12 +1,12 @@
-with Ada_Outputs.Definitions;
-with Ada_Outputs.Clauses;
-with Ada_Outputs.Declarations;
-with Ada_Outputs.Expressions;
-with Ada_Outputs.Joins;
-with Ada_Outputs.Statements;
-with Ada_Outputs.Units;
+with Ada_Pretty.Definitions;
+with Ada_Pretty.Clauses;
+with Ada_Pretty.Declarations;
+with Ada_Pretty.Expressions;
+with Ada_Pretty.Joins;
+with Ada_Pretty.Statements;
+with Ada_Pretty.Units;
 
-package body Ada_Outputs is
+package body Ada_Pretty is
 
    --------------
    -- Document --
@@ -565,7 +565,7 @@ package body Ada_Outputs is
       Exceptions    : Node_Access := null) return not null Node_Access is
       pragma Unreferenced (Self);
    begin
-      return new Node'Class'(Ada_Outputs.Declarations.New_Subprogram_Body
+      return new Node'Class'(Ada_Pretty.Declarations.New_Subprogram_Body
                              (Specification,
                               Declarations,
                               Statements,
@@ -756,4 +756,4 @@ package body Ada_Outputs is
       return Printer.Pretty (Width => 79, Input => Document);
    end To_Text;
 
-end Ada_Outputs;
+end Ada_Pretty;

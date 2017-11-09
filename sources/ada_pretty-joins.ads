@@ -1,4 +1,4 @@
-private package Ada_Outputs.Joins is
+private package Ada_Pretty.Joins is
 
    type Join is new Node with private;
 
@@ -19,4 +19,4 @@ private
      Pad     : Natural)
       return League.Pretty_Printers.Document;
 
-end Ada_Outputs.Joins;
+end Ada_Pretty.Joins;

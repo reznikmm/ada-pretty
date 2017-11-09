@@ -1,0 +1,12 @@
+with "matreshka_league";
+
+project Ada_Pretty is
+
+   for Source_Dirs use ("../sources");
+   for Object_Dir use "../.objs";
+
+   package Compiler is
+      for Switches ("Ada") use ("-g", "-gnatyyo", "-gnatwae");
+   end Compiler;
+
+end Ada_Pretty;

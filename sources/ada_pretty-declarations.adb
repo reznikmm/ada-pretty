@@ -1,6 +1,6 @@
-with Ada_Outputs.Definitions;
+with Ada_Pretty.Definitions;
 
-package body Ada_Outputs.Declarations is
+package body Ada_Pretty.Declarations is
 
    --------------
    -- Document --
@@ -171,7 +171,7 @@ package body Ada_Outputs.Declarations is
       Result.New_Line;
       Result.Put ("end ");
       Result.Append
-        (Ada_Outputs.Definitions.Subprogram
+        (Ada_Pretty.Definitions.Subprogram
            (Self.Specification.all).Name.Document (Printer, 0));
       Result.Put (";");
 
@@ -421,4 +421,4 @@ package body Ada_Outputs.Declarations is
          Comment);
    end New_Variable;
 
-end Ada_Outputs.Declarations;
+end Ada_Pretty.Declarations;

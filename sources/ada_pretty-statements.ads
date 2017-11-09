@@ -1,4 +1,4 @@
-private package Ada_Outputs.Statements is
+private package Ada_Pretty.Statements is
 
    type Assignment is new Node with private;
 
@@ -121,4 +121,4 @@ private
      Pad     : Natural)
       return League.Pretty_Printers.Document;
 
-end Ada_Outputs.Statements;
+end Ada_Pretty.Statements;

@@ -1,4 +1,4 @@
-package body Ada_Outputs.Clauses is
+package body Ada_Pretty.Clauses is
 
    --------------
    -- Document --
@@ -172,4 +172,4 @@ package body Ada_Outputs.Clauses is
       return With_Clause'(Name, Is_Limited, Is_Private);
    end New_With;
 
-end Ada_Outputs.Clauses;
+end Ada_Pretty.Clauses;

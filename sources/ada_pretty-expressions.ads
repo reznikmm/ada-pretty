@@ -1,4 +1,4 @@
-private package Ada_Outputs.Expressions is
+private package Ada_Pretty.Expressions is
 
    type Apply is new Node with private;
 
@@ -152,4 +152,4 @@ private
 
    overriding function Max_Pad (Self : Argument_Association) return Natural;
 
-end Ada_Outputs.Expressions;
+end Ada_Pretty.Expressions;
