@@ -1,9 +1,16 @@
 with "matreshka_league";
 
-project Ada_Pretty is
+library project Ada_Pretty is
+
+   Version := "0.1.0";
 
    for Source_Dirs use ("../sources");
    for Object_Dir use "../.objs";
+   for Library_Kind use "dynamic";
+   for Library_Name use "adapretty";
+   for Library_Dir use "../.libs";
+   for Library_ALI_Dir use "../.libs/adapretty";
+   for Library_Version use "libadapretty.so." & Version;
 
    package Compiler is
       for Switches ("Ada") use ("-g", "-gnatyyo", "-gnatwae");

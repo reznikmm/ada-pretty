@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/reznikmm/ada-pretty.svg?branch=master)](https://travis-ci.org/reznikmm/ada-pretty)
+
 # Ada Pretty Printer Library
 
 This project provides an ability to generate nice formated Ada sources
@@ -7,7 +9,7 @@ a file.
 
 Example:
 
-```
+```ada
 with Ada.Characters.Wide_Wide_Latin_1;
 with Ada.Wide_Wide_Text_IO;
 
