@@ -1,11 +1,29 @@
-[![Build Status](https://travis-ci.org/reznikmm/ada-pretty.svg?branch=master)](https://travis-ci.org/reznikmm/ada-pretty)
+Ada Pretty Printer Library _(ada-pretty)_
+=========================================
 
-# Ada Pretty Printer Library
+[![Build Status](https://travis-ci.org/reznikmm/ada-pretty.svg?branch=master)](https://travis-ci.org/reznikmm/ada-pretty)
+[![Download](https://api.bintray.com/packages/reznikmm/matreshka/ada-pretty/images/download.svg) ](https://bintray.com/reznikmm/matreshka/ada-pretty/_latestVersion)
+[![reuse compliant](https://img.shields.io/badge/reuse-compliant-green.svg)](https://reuse.software/)
+
+> Pretty printing library for Ada
 
 This project provides an ability to generate nice formated Ada sources
-from your program. Instead of a plenty of Put_Line statements you just
+from your program. Instead of plenty of Put_Line statements you just
 create desired Ada constructions in form of a tree and then print it in
 a file.
+
+## Install
+
+Run
+```
+make all install PREFIX=/path/to/install
+```
+
+### Dependencies
+It depends on [Matreshka](https://forge.ada-ru.org/matreshka) library.
+
+### Usage
+Add `with "ada_pretty";` in your project file.
 
 Example:
 
@@ -110,3 +128,18 @@ package Qt_Ada.API.Strings is
 
 end Qt_Ada.API.Strings;
 ```
+
+## Maintainer
+
+[@MaximReznik](https://github.com/reznikmm).
+
+## Contribute
+
+Feel free to dive in!
+[Open an issue](https://github.com/reznikmm/ada-pretty/issues/new)
+or submit PRs.
+
+## License
+
+[MIT](LICENSE) © Maxim Reznik
+
