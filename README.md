@@ -22,7 +22,7 @@ make all install PREFIX=/path/to/install
 ### Dependencies
 It depends on [Matreshka](https://forge.ada-ru.org/matreshka) library.
 
-### Usage
+## Usage
 Add `with "ada_pretty";` in your project file.
 
 Example:
