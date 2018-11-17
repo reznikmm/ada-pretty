@@ -16,7 +16,7 @@
     },
 
     "version": {
-        "name": "0.1-git",
+        "name": "0.2-git",
         "desc": "This is a trunk version",
         "gpgSign": false
     },
