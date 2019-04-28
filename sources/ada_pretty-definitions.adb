@@ -51,6 +51,27 @@ package body Ada_Pretty.Definitions is
    --------------
 
    overriding function Document
+    (Self    : Interface_Type;
+     Printer : not null access League.Pretty_Printers.Printer'Class;
+     Pad     : Natural)
+      return League.Pretty_Printers.Document
+   is
+      pragma Unreferenced (Pad);
+      Result : League.Pretty_Printers.Document := Printer.New_Document;
+   begin
+      if Self.Is_Limited then
+         Result.Put ("limited ");
+      end if;
+
+      Result.Put ("interface");
+      return Result;
+   end Document;
+
+   --------------
+   -- Document --
+   --------------
+
+   overriding function Document
     (Self    : Null_Exclusion;
      Printer : not null access League.Pretty_Printers.Printer'Class;
      Pad     : Natural)
@@ -199,6 +220,15 @@ package body Ada_Pretty.Definitions is
    begin
       return Derived'(Parent => Parent);
    end New_Derived;
+
+   -------------------
+   -- New_Interface --
+   -------------------
+
+   function New_Interface (Is_Limited : Boolean) return Node'Class is
+   begin
+      return Interface_Type'(Is_Limited => Is_Limited);
+   end New_Interface;
 
    ------------------------
    -- New_Null_Exclusion --

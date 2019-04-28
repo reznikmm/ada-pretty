@@ -22,6 +22,10 @@ private package Ada_Pretty.Definitions is
      (Definition : not null Node_Access;
       Exclude    : Boolean) return Node'Class;
 
+   type Interface_Type is new Node with private;
+
+   function New_Interface (Is_Limited : Boolean) return Node'Class;
+
    type Private_Record is new Node with private;
 
    function New_Private_Record (Is_Tagged : Boolean) return Node'Class;
@@ -72,6 +76,16 @@ private
 
    overriding function Document
     (Self    : Null_Exclusion;
+     Printer : not null access League.Pretty_Printers.Printer'Class;
+     Pad     : Natural)
+      return League.Pretty_Printers.Document;
+
+   type Interface_Type is new Node with record
+      Is_Limited : Boolean;
+   end record;
+
+   overriding function Document
+    (Self    : Interface_Type;
      Printer : not null access League.Pretty_Printers.Printer'Class;
      Pad     : Natural)
       return League.Pretty_Printers.Document;

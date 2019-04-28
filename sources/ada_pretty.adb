@@ -293,6 +293,20 @@ package body Ada_Pretty is
       return new Node'Class'(Expressions.New_Infix (Operator, Left));
    end New_Infix;
 
+   -------------------
+   -- New_Interface --
+   -------------------
+
+   not overriding function New_Interface
+     (Self       : access Factory;
+      Is_Limited : Boolean := False) return not null Node_Access
+   is
+      pragma Unreferenced (Self);
+   begin
+      return new Node'Class'(Definitions.New_Interface
+                               (Is_Limited));
+   end New_Interface;
+
    --------------
    -- New_List --
    --------------

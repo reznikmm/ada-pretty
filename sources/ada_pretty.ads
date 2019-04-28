@@ -154,6 +154,10 @@ package Ada_Pretty is
       Definition : not null Node_Access;
       Exclude    : Boolean := True) return not null Node_Access;
 
+   not overriding function New_Interface
+     (Self       : access Factory;
+      Is_Limited : Boolean := False) return not null Node_Access;
+
    not overriding function New_Private_Record
      (Self      : access Factory;
       Is_Tagged : Boolean := False) return not null Node_Access;
