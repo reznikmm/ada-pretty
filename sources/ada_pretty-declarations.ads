@@ -44,6 +44,7 @@ private package Ada_Pretty.Declarations is
    function New_Subprogram_Declaration
      (Specification : not null Node_Access;
       Aspects       : Node_Access := null;
+      Is_Abstract   : Boolean;
       Comment       : League.Strings.Universal_String) return Node'Class;
 
    type Type_Declaration is new Node with private;
@@ -134,6 +135,7 @@ private
    type Subprogram_Declaration is new Declaration with record
       Specification : not null Node_Access;
       Aspects       : Node_Access;
+      Is_Abstract   : Boolean;
       Comment       : League.Strings.Universal_String;
    end record;
 

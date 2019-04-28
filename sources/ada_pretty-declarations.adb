@@ -198,7 +198,16 @@ package body Ada_Pretty.Declarations is
    begin
       Result.New_Line;
       Result.Append (Self.Specification.Document (Printer, Pad));
-      Result.Append (Print_Aspect (Self.Aspects, Printer));
+
+      if Self.Is_Abstract then
+         Result.Put (" is abstract");
+      end if;
+
+      if Self.Aspects /= null then
+         Result.New_Line;
+         Result.Append (Print_Aspect (Self.Aspects, Printer));
+      end if;
+
       Result.Put (";");
 
       return Result;
@@ -378,9 +387,11 @@ package body Ada_Pretty.Declarations is
    function New_Subprogram_Declaration
      (Specification : not null Node_Access;
       Aspects       : Node_Access := null;
+      Is_Abstract   : Boolean;
       Comment       : League.Strings.Universal_String) return Node'Class is
    begin
-      return Subprogram_Declaration'(Specification, Aspects, Comment);
+      return Subprogram_Declaration'
+        (Specification, Aspects, Is_Abstract, Comment);
    end New_Subprogram_Declaration;
 
    --------------

@@ -107,6 +107,7 @@ package Ada_Pretty is
      (Self          : access Factory;
       Specification : not null Node_Access;
       Aspects       : Node_Access := null;
+      Is_Abstract   : Boolean := False;
       Comment       : League.Strings.Universal_String :=
         League.Strings.Empty_Universal_String) return not null Node_Access;
 
