@@ -41,7 +41,7 @@ private package Ada_Pretty.Definitions is
    function Name (Self : Subprogram) return Node_Access;
 
    function New_Subprogram
-     (Is_Overriding : Boolean;
+     (Is_Overriding : Trilean;
       Name          : Node_Access;
       Parameters    : Node_Access;
       Result        : Node_Access) return Node'Class;
@@ -112,7 +112,7 @@ private
       return League.Pretty_Printers.Document;
 
    type Subprogram is new Node with record
-      Is_Overriding : Boolean;
+      Is_Overriding : Trilean;
       Name          : Node_Access;
       Parameters    : Node_Access;
       Result        : Node_Access;

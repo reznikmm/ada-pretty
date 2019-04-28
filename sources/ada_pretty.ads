@@ -167,9 +167,11 @@ package Ada_Pretty is
       Parent     : Node_Access := null;
       Components : Node_Access := null) return not null Node_Access;
 
+   type Trilean is (False, True, Unspecified);
+
    not overriding function New_Subprogram_Specification
      (Self          : access Factory;
-      Is_Overriding : Boolean := False;
+      Is_Overriding : Trilean := Unspecified;
       Name          : Node_Access := null;
       Parameters    : Node_Access := null;
       Result        : Node_Access := null) return not null Node_Access;

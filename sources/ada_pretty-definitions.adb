@@ -153,8 +153,10 @@ package body Ada_Pretty.Definitions is
       Profile : League.Pretty_Printers.Document := Printer.New_Document;
       Returns : League.Pretty_Printers.Document := Printer.New_Document;
    begin
-      if Self.Is_Overriding then
+      if Self.Is_Overriding = True then
          Result.Put ("overriding ");
+      elsif Self.Is_Overriding = False then
+         Result.Put ("not overriding ");
       end if;
 
       if Self.Result = null then
@@ -266,7 +268,7 @@ package body Ada_Pretty.Definitions is
    --------------------
 
    function New_Subprogram
-     (Is_Overriding : Boolean;
+     (Is_Overriding : Trilean;
       Name          : Node_Access;
       Parameters    : Node_Access;
       Result        : Node_Access) return Node'Class is
