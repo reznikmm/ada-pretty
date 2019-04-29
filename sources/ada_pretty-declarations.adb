@@ -236,8 +236,16 @@ package body Ada_Pretty.Declarations is
       end if;
 
       if Self.Definition /= null then
-         Result.Put (" is ");
-         Result.Append (Self.Definition.Document (Printer, 0));
+         declare
+            Def : League.Pretty_Printers.Document := Printer.New_Document;
+         begin
+            Def.New_Line;
+            Def.Append (Self.Definition.Document (Printer, 0));
+            Def.Nest (2);
+            Def.Group;
+            Result.Put (" is");
+            Result.Append (Def);
+         end;
       end if;
 
       Result.Append (Print_Aspect (Self.Aspects, Printer));

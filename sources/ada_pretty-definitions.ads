@@ -24,7 +24,9 @@ private package Ada_Pretty.Definitions is
 
    type Interface_Type is new Node with private;
 
-   function New_Interface (Is_Limited : Boolean) return Node'Class;
+   function New_Interface
+     (Is_Limited : Boolean;
+      Parents    : Node_Access) return Node'Class;
 
    type Private_Record is new Node with private;
 
@@ -82,6 +84,7 @@ private
 
    type Interface_Type is new Node with record
       Is_Limited : Boolean;
+      Parents    : Node_Access;
    end record;
 
    overriding function Document

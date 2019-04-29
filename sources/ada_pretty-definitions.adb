@@ -56,7 +56,6 @@ package body Ada_Pretty.Definitions is
      Pad     : Natural)
       return League.Pretty_Printers.Document
    is
-      pragma Unreferenced (Pad);
       Result : League.Pretty_Printers.Document := Printer.New_Document;
    begin
       if Self.Is_Limited then
@@ -64,6 +63,11 @@ package body Ada_Pretty.Definitions is
       end if;
 
       Result.Put ("interface");
+
+      if Self.Parents /= null then
+         Result.Append (Self.Parents.Document (Printer, Pad));
+      end if;
+
       return Result;
    end Document;
 
@@ -227,9 +231,11 @@ package body Ada_Pretty.Definitions is
    -- New_Interface --
    -------------------
 
-   function New_Interface (Is_Limited : Boolean) return Node'Class is
+   function New_Interface
+     (Is_Limited : Boolean;
+      Parents    : Node_Access) return Node'Class is
    begin
-      return Interface_Type'(Is_Limited => Is_Limited);
+      return Interface_Type'(Is_Limited, Parents);
    end New_Interface;
 
    ------------------------

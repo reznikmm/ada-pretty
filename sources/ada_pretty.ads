@@ -157,7 +157,8 @@ package Ada_Pretty is
 
    not overriding function New_Interface
      (Self       : access Factory;
-      Is_Limited : Boolean := False) return not null Node_Access;
+      Is_Limited : Boolean := False;
+      Parents    : Node_Access := null) return not null Node_Access;
 
    not overriding function New_Private_Record
      (Self      : access Factory;
