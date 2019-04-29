@@ -57,6 +57,14 @@ private package Ada_Pretty.Expressions is
      (Choice : Node_Access;
       Value  : not null Node_Access) return Node'Class;
 
+   type If_Expression is new Node with private;
+
+   function New_If
+     (Condition  : not null Node_Access;
+      Then_Path  : not null Node_Access;
+      Elsif_List : Node_Access;
+      Else_Path  : Node_Access) return Node'Class;
+
 private
 
    type Apply is new Node with record
@@ -157,5 +165,18 @@ private
    type Argument_Association is new Component_Association with null record;
 
    overriding function Max_Pad (Self : Argument_Association) return Natural;
+
+   type If_Expression is new Node with record
+      Condition  : not null Node_Access;
+      Then_Path  : not null Node_Access;
+      Elsif_List : Node_Access;
+      Else_Path  : Node_Access;
+   end record;
+
+   overriding function Document
+    (Self    : If_Expression;
+     Printer : not null access League.Pretty_Printers.Printer'Class;
+     Pad     : Natural)
+      return League.Pretty_Printers.Document;
 
 end Ada_Pretty.Expressions;

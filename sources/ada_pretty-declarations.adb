@@ -204,7 +204,6 @@ package body Ada_Pretty.Declarations is
       end if;
 
       if Self.Aspects /= null then
-         Result.New_Line;
          Result.Append (Print_Aspect (Self.Aspects, Printer));
       end if;
 

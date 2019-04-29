@@ -66,6 +66,55 @@ package body Ada_Pretty.Expressions is
    --------------
 
    overriding function Document
+    (Self    : If_Expression;
+     Printer : not null access League.Pretty_Printers.Printer'Class;
+     Pad     : Natural)
+      return League.Pretty_Printers.Document
+   is
+      Result : League.Pretty_Printers.Document := Printer.New_Document;
+      Then_Part : League.Pretty_Printers.Document := Printer.New_Document;
+   begin
+      Result.Put ("if ");
+      Result.Append (Self.Condition.Document (Printer, Pad));
+      Then_Part.New_Line;
+      Then_Part.Put ("then ");
+      Then_Part.Append (Self.Then_Path.Document (Printer, Pad));
+      Then_Part.Nest (2);
+      Result.Append (Then_Part);
+
+      if Self.Elsif_List /= null then
+         declare
+            Elsif_Part : League.Pretty_Printers.Document :=
+              Printer.New_Document;
+         begin
+            Elsif_Part.Append (Self.Elsif_List.Document (Printer, Pad));
+            Elsif_Part.Nest (2);
+            Result.New_Line;
+            Result.Append (Elsif_Part);
+         end;
+      end if;
+
+      if Self.Else_Path /= null then
+         declare
+            Else_Part : League.Pretty_Printers.Document :=
+              Printer.New_Document;
+         begin
+            Else_Part.Put ("else ");
+            Else_Part.Append (Self.Else_Path.Document (Printer, Pad));
+            Else_Part.Nest (2);
+            Result.New_Line;
+            Result.Append (Else_Part);
+         end;
+      end if;
+
+      return Result;
+   end Document;
+
+   --------------
+   -- Document --
+   --------------
+
+   overriding function Document
      (Self    : Infix;
       Printer : not null access League.Pretty_Printers.Printer'Class;
       Pad     : Natural)
@@ -262,6 +311,19 @@ package body Ada_Pretty.Expressions is
    begin
       return Component_Association'(Choices, Value);
    end New_Component_Association;
+
+   ------------
+   -- New_If --
+   ------------
+
+   function New_If
+     (Condition  : not null Node_Access;
+      Then_Path  : not null Node_Access;
+      Elsif_List : Node_Access;
+      Else_Path  : Node_Access) return Node'Class is
+   begin
+      return If_Expression'(Condition, Then_Path, Elsif_List, Else_Path);
+   end New_If;
 
    ---------------
    -- New_Infix --

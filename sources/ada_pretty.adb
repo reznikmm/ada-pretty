@@ -279,6 +279,23 @@ package body Ada_Pretty is
                              (Condition, Then_Path, Elsif_List, Else_Path));
    end New_If;
 
+   -----------------------
+   -- New_If_Expression --
+   -----------------------
+
+   not overriding function New_If_Expression
+     (Self       : access Factory;
+      Condition  : not null Node_Access;
+      Then_Path  : not null Node_Access;
+      Elsif_List : Node_Access := null;
+      Else_Path  : Node_Access := null) return not null Node_Access
+   is
+      pragma Unreferenced (Self);
+   begin
+      return new Node'Class'(Expressions.New_If
+                             (Condition, Then_Path, Elsif_List, Else_Path));
+   end New_If_Expression;
+
    ---------------
    -- New_Infix --
    ---------------

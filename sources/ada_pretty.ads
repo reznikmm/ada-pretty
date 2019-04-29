@@ -229,6 +229,13 @@ package Ada_Pretty is
       Value   : not null Node_Access;
       Choices : Node_Access := null) return not null Node_Access;
 
+   not overriding function New_If_Expression
+     (Self       : access Factory;
+      Condition  : not null Node_Access;
+      Then_Path  : not null Node_Access;
+      Elsif_List : Node_Access := null;
+      Else_Path  : Node_Access := null) return not null Node_Access;
+
    --  Statements and Paths
 
    not overriding function New_Assignment

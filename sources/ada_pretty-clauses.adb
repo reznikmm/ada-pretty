@@ -21,8 +21,16 @@ package body Ada_Pretty.Clauses is
       Result.Append (Self.Name.Document (Printer, Pad));
 
       if Self.Value /= null then
-         Result.Put (" => ");
-         Result.Append (Self.Value.Document (Printer, 0));
+         declare
+            Value : League.Pretty_Printers.Document := Printer.New_Document;
+         begin
+            Value.New_Line;
+            Value.Append (Self.Value.Document (Printer, 0).Group);
+            Value.Nest (2);
+            Value.Group;
+            Result.Put (" =>");
+            Result.Append (Value);
+         end;
       end if;
 
       return Result;
