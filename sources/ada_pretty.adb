@@ -619,13 +619,18 @@ package body Ada_Pretty is
       Specification : not null Node_Access;
       Aspects       : Node_Access := null;
       Is_Abstract   : Boolean := False;
+      Expression    : Node_Access := null;
       Comment       : League.Strings.Universal_String :=
         League.Strings.Empty_Universal_String) return not null Node_Access
    is
       pragma Unreferenced (Self);
    begin
       return new Node'Class'(Declarations.New_Subprogram_Declaration
-                             (Specification, Aspects, Is_Abstract, Comment));
+                             (Specification,
+                              Aspects,
+                              Is_Abstract,
+                              Expression,
+                              Comment));
    end New_Subprogram_Declaration;
 
    --------------------
