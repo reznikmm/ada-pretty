@@ -45,6 +45,7 @@ private package Ada_Pretty.Declarations is
      (Specification : not null Node_Access;
       Aspects       : Node_Access := null;
       Is_Abstract   : Boolean;
+      Is_Null       : Boolean;
       Expression    : Node_Access;
       Comment       : League.Strings.Universal_String) return Node'Class;
 
@@ -137,6 +138,7 @@ private
       Specification : not null Node_Access;
       Aspects       : Node_Access;
       Is_Abstract   : Boolean;
+      Is_Null       : Boolean;
       Expression    : Node_Access;
       Comment       : League.Strings.Universal_String;
    end record;

@@ -199,12 +199,18 @@ package body Ada_Pretty.Declarations is
       Result.New_Line;
       Result.Append (Self.Specification.Document (Printer, Pad));
 
-      if Self.Is_Abstract then
+      if Self.Is_Abstract or Self.Is_Null then
          declare
             Tail : League.Pretty_Printers.Document := Printer.New_Document;
          begin
             Tail.New_Line;
-            Tail.Put ("is abstract");
+
+            if Self.Is_Abstract then
+               Tail.Put ("is abstract");
+            else
+               Tail.Put ("is null");
+            end if;
+
             Tail.Nest (2);
             Tail.Group;
             Result.Append (Tail);
@@ -417,11 +423,12 @@ package body Ada_Pretty.Declarations is
      (Specification : not null Node_Access;
       Aspects       : Node_Access := null;
       Is_Abstract   : Boolean;
+      Is_Null       : Boolean;
       Expression    : Node_Access;
       Comment       : League.Strings.Universal_String) return Node'Class is
    begin
       return Subprogram_Declaration'
-        (Specification, Aspects, Is_Abstract, Expression, Comment);
+        (Specification, Aspects, Is_Abstract, Is_Null, Expression, Comment);
    end New_Subprogram_Declaration;
 
    --------------
