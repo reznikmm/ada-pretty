@@ -146,7 +146,9 @@ package body Ada_Pretty.Statements is
    begin
       Result.New_Line;
 
-      if Self.Expression /= null then
+      if Self.Expression = null then
+         Result.Put ("null");
+      else
          Result.Append (Self.Expression.Document (Printer, Pad));
       end if;
 
