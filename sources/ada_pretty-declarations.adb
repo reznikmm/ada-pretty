@@ -229,6 +229,19 @@ package body Ada_Pretty.Declarations is
             Tail.Group;
             Result.Append (Tail);
          end;
+      elsif Self.Renamed /= null then
+         declare
+            Tail : League.Pretty_Printers.Document := Printer.New_Document;
+            Expr : League.Pretty_Printers.Document := Printer.New_Document;
+         begin
+            Expr.Put ("renames ");
+            Expr.Append (Self.Renamed.Document (Printer, Pad).Nest (2));
+            Tail.New_Line;
+            Tail.Append (Expr);
+            Tail.Nest (2);
+            Tail.Group;
+            Result.Append (Tail);
+         end;
       end if;
 
       if Self.Aspects /= null then
@@ -425,10 +438,13 @@ package body Ada_Pretty.Declarations is
       Is_Abstract   : Boolean;
       Is_Null       : Boolean;
       Expression    : Node_Access;
+      Renamed       : Node_Access;
       Comment       : League.Strings.Universal_String) return Node'Class is
    begin
       return Subprogram_Declaration'
-        (Specification, Aspects, Is_Abstract, Is_Null, Expression, Comment);
+        (Specification, Aspects,
+         Is_Abstract, Is_Null,
+         Expression, Renamed, Comment);
    end New_Subprogram_Declaration;
 
    --------------

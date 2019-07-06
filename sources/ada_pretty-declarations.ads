@@ -47,6 +47,7 @@ private package Ada_Pretty.Declarations is
       Is_Abstract   : Boolean;
       Is_Null       : Boolean;
       Expression    : Node_Access;
+      Renamed       : Node_Access;
       Comment       : League.Strings.Universal_String) return Node'Class;
 
    type Type_Declaration is new Node with private;
@@ -140,6 +141,7 @@ private
       Is_Abstract   : Boolean;
       Is_Null       : Boolean;
       Expression    : Node_Access;
+      Renamed       : Node_Access;
       Comment       : League.Strings.Universal_String;
    end record;
 

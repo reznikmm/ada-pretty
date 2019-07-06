@@ -110,6 +110,7 @@ package Ada_Pretty is
       Is_Abstract   : Boolean := False;
       Is_Null       : Boolean := False;
       Expression    : Node_Access := null;
+      Renamed       : Node_Access := null;
       Comment       : League.Strings.Universal_String :=
         League.Strings.Empty_Universal_String) return not null Node_Access;
 

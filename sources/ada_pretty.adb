@@ -621,6 +621,7 @@ package body Ada_Pretty is
       Is_Abstract   : Boolean := False;
       Is_Null       : Boolean := False;
       Expression    : Node_Access := null;
+      Renamed       : Node_Access := null;
       Comment       : League.Strings.Universal_String :=
         League.Strings.Empty_Universal_String) return not null Node_Access
    is
@@ -630,7 +631,7 @@ package body Ada_Pretty is
                              (Specification,
                               Aspects,
                               Is_Abstract, Is_Null,
-                              Expression,
+                              Expression, Renamed,
                               Comment));
    end New_Subprogram_Declaration;
 
