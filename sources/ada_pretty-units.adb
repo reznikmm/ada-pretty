@@ -33,6 +33,27 @@ package body Ada_Pretty.Units is
       return Result;
    end Document;
 
+   --------------
+   -- Document --
+   --------------
+
+   overriding function Document
+    (Self    : Subunit;
+     Printer : not null access League.Pretty_Printers.Printer'Class;
+     Pad     : Natural)
+      return League.Pretty_Printers.Document
+   is
+      Result : League.Pretty_Printers.Document := Printer.New_Document;
+   begin
+      Result.New_Line;
+      Result.Put ("separate (");
+      Result.Append (Self.Parent_Name.Document (Printer, Pad));
+      Result.Put (")");
+      Result.Append (Self.Proper_Body.Document (Printer, Pad));
+
+      return Result;
+   end Document;
+
    --------------------------
    -- New_Compilation_Unit --
    --------------------------
@@ -41,10 +62,20 @@ package body Ada_Pretty.Units is
      (Root    : not null Node_Access;
       Clauses : Node_Access := null;
       License : League.Strings.Universal_String)
-      return Node'Class
-   is
+      return Node'Class is
    begin
       return Compilation_Unit'(Root, Clauses, License);
    end New_Compilation_Unit;
+
+   -----------------
+   -- New_Subunit --
+   -----------------
+
+   function New_Subunit
+     (Parent_Name : not null Node_Access;
+      Proper_Body : not null Node_Access) return Node'Class is
+   begin
+      return Subunit'(Parent_Name, Proper_Body);
+   end New_Subunit;
 
 end Ada_Pretty.Units;

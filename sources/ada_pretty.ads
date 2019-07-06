@@ -30,6 +30,11 @@ package Ada_Pretty is
       License : League.Strings.Universal_String :=
         League.Strings.Empty_Universal_String) return not null Node_Access;
 
+   not overriding function New_Subunit
+     (Self        : access Factory;
+      Parent_Name : not null Node_Access;
+      Proper_Body : not null Node_Access) return not null Node_Access;
+
    --  Node lists
 
    not overriding function New_List

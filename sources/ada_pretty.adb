@@ -676,6 +676,20 @@ package body Ada_Pretty is
    end New_Subtype;
    pragma Warnings (On);
 
+   -----------------
+   -- New_Subunit --
+   -----------------
+
+   not overriding function New_Subunit
+     (Self        : access Factory;
+      Parent_Name : not null Node_Access;
+      Proper_Body : not null Node_Access) return not null Node_Access
+   is
+      pragma Unreferenced (Self);
+   begin
+      return new Node'Class'(Units.New_Subunit (Parent_Name, Proper_Body));
+   end New_Subunit;
+
    --------------
    -- New_Type --
    --------------
