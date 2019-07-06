@@ -26,7 +26,7 @@ package body Ada_Pretty.Expressions is
    begin
       Result.New_Line;
       Result.Put ("(");
-      Result.Append (Self.Arguments.Document (Printer, 0));
+      Result.Append (Self.Arguments.Document (Printer, 0).Nest (1));
       Result.Put (")");
       Result.Nest (2);
       Prefix.Append (Result);
