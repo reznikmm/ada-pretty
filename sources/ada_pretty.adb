@@ -106,14 +106,14 @@ package body Ada_Pretty is
    ----------------
 
    not overriding function New_Access
-     (Self   : access Factory;
-      Is_All : Boolean;
-      Target : not null Node_Access) return not null Node_Access
+     (Self     : access Factory;
+      Modifier : Access_Modifier := Unspecified;
+      Target   : not null Node_Access) return not null Node_Access
    is
       pragma Unreferenced (Self);
    begin
       return new Node'Class'(Definitions.New_Access
-                             (Is_All => Is_All, Target => Target));
+                             (Modifier => Modifier, Target => Target));
    end New_Access;
 
    ---------------

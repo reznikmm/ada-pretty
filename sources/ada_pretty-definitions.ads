@@ -9,8 +9,8 @@ private package Ada_Pretty.Definitions is
    type Access_Definition is new Node with private;
 
    function New_Access
-     (Is_All : Boolean;
-      Target : not null Node_Access) return Node'Class;
+     (Modifier : Access_Modifier;
+      Target   : not null Node_Access) return Node'Class;
 
    type Derived is new Node with private;
 
@@ -51,8 +51,8 @@ private package Ada_Pretty.Definitions is
 private
 
    type Access_Definition is new Node with record
-      Is_All : Boolean;
-      Target : not null Node_Access;
+      Modifier : Access_Modifier;
+      Target   : not null Node_Access;
    end record;
 
    overriding function Document

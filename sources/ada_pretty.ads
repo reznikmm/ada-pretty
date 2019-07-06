@@ -149,10 +149,12 @@ package Ada_Pretty is
 
    --  Definitions
 
+   type Access_Modifier is (Access_All, Access_Constant, Unspecified);
+
    not overriding function New_Access
-     (Self   : access Factory;
-      Is_All : Boolean;
-      Target : not null Node_Access) return not null Node_Access;
+     (Self     : access Factory;
+      Modifier : Access_Modifier := Unspecified;
+      Target   : not null Node_Access) return not null Node_Access;
 
    not overriding function New_Derived
      (Self   : access Factory;

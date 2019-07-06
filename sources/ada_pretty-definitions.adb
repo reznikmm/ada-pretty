@@ -19,9 +19,14 @@ package body Ada_Pretty.Definitions is
       Result : League.Pretty_Printers.Document := Printer.New_Document;
    begin
       Result.Put ("access ");
-      if Self.Is_All then
-         Result.Put ("all ");
-      end if;
+      case Self.Modifier is
+         when Access_All =>
+            Result.Put ("all ");
+         when Access_Constant =>
+            Result.Put ("constant ");
+         when Unspecified =>
+            null;
+      end case;
 
       Result.Append (Self.Target.Document (Printer, Pad));
 
@@ -212,10 +217,10 @@ package body Ada_Pretty.Definitions is
    ----------------
 
    function New_Access
-     (Is_All : Boolean;
-      Target : not null Node_Access) return Node'Class is
+     (Modifier : Access_Modifier;
+      Target   : not null Node_Access) return Node'Class is
    begin
-      return Access_Definition'(Is_All, Target);
+      return Access_Definition'(Modifier, Target);
    end New_Access;
 
    -----------------
