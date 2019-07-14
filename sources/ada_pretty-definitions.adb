@@ -107,10 +107,14 @@ package body Ada_Pretty.Definitions is
       Pad     : Natural)
       return League.Pretty_Printers.Document
    is
-      pragma Unreferenced (Pad);
       Result : League.Pretty_Printers.Document := Printer.New_Document;
    begin
-      if Self.Is_Tagged then
+      if Self.Parents /= null then
+         Result.Put ("new ");
+         Result.Append (Self.Parents.Document (Printer, Pad).Nest (2));
+         Result.New_Line;
+         Result.Put ("with ");
+      elsif Self.Is_Tagged then
          Result.Put ("tagged ");
       end if;
 
@@ -137,7 +141,8 @@ package body Ada_Pretty.Definitions is
       if Self.Parent /= null then
          Result.Put ("new ");
          Result.Append (Self.Parent.Document (Printer, 0));
-         Result.Put (" with ");
+         Result.New_Line;
+         Result.Put ("with ");
       end if;
 
       if Self.Components = null then
@@ -262,9 +267,11 @@ package body Ada_Pretty.Definitions is
    -- New_Private_Record --
    ------------------------
 
-   function New_Private_Record (Is_Tagged : Boolean) return Node'Class is
+   function New_Private_Record
+     (Is_Tagged : Boolean;
+      Parents   : Node_Access) return Node'Class is
    begin
-      return Private_Record'(Is_Tagged => Is_Tagged);
+      return Private_Record'(Is_Tagged, Parents);
    end New_Private_Record;
 
    ----------------

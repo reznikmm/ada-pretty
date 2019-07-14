@@ -496,12 +496,13 @@ package body Ada_Pretty is
 
    not overriding function New_Private_Record
      (Self      : access Factory;
-      Is_Tagged : Boolean := False) return not null Node_Access
+      Is_Tagged : Boolean := False;
+      Parents   : Node_Access := null) return not null Node_Access
    is
       pragma Unreferenced (Self);
    begin
       return new Node'Class'(Definitions.New_Private_Record
-                               (Is_Tagged));
+                               (Is_Tagged, Parents));
    end New_Private_Record;
 
    ----------------

@@ -30,7 +30,9 @@ private package Ada_Pretty.Definitions is
 
    type Private_Record is new Node with private;
 
-   function New_Private_Record (Is_Tagged : Boolean) return Node'Class;
+   function New_Private_Record
+     (Is_Tagged : Boolean;
+      Parents   : Node_Access) return Node'Class;
 
    type Record_Definition is new Node with private;
 
@@ -96,6 +98,7 @@ private
 
    type Private_Record is new Node with record
       Is_Tagged : Boolean;
+      Parents   : Node_Access := null;
    end record;
 
    overriding function Document
