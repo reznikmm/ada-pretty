@@ -35,8 +35,9 @@ private package Ada_Pretty.Definitions is
    type Record_Definition is new Node with private;
 
    function New_Record
-     (Parent       : Node_Access := null;
-      Components   : Node_Access) return Node'Class;
+     (Parent      : Node_Access := null;
+      Components  : Node_Access;
+      Is_Abstract : Boolean) return Node'Class;
 
    type Subprogram is new Node with private;
 
@@ -104,8 +105,9 @@ private
       return League.Pretty_Printers.Document;
 
    type Record_Definition is new Node with record
-      Parent     : Node_Access;
-      Components : Node_Access;
+      Parent      : Node_Access;
+      Components  : Node_Access;
+      Is_Abstract : Boolean;
    end record;
 
    overriding function Document

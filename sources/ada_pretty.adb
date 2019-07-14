@@ -511,12 +511,13 @@ package body Ada_Pretty is
    not overriding function New_Record
      (Self       : access Factory;
       Parent     : Node_Access := null;
-      Components : Node_Access := null) return not null Node_Access
+      Components : Node_Access := null;
+      Is_Abstract : Boolean := False) return not null Node_Access
    is
       pragma Unreferenced (Self);
    begin
       return new Node'Class'(Definitions.New_Record
-                               (Parent, Components));
+                               (Parent, Components, Is_Abstract));
    end New_Record;
 
    ----------------

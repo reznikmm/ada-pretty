@@ -130,6 +130,10 @@ package body Ada_Pretty.Definitions is
    is
       Result : League.Pretty_Printers.Document := Printer.New_Document;
    begin
+      if Self.Is_Abstract then
+         Result.Put ("abstract ");
+      end if;
+
       if Self.Parent /= null then
          Result.Put ("new ");
          Result.Append (Self.Parent.Document (Printer, 0));
@@ -268,10 +272,11 @@ package body Ada_Pretty.Definitions is
    ----------------
 
    function New_Record
-     (Parent       : Node_Access := null;
-      Components   : Node_Access) return Node'Class is
+     (Parent      : Node_Access := null;
+      Components  : Node_Access;
+      Is_Abstract : Boolean) return Node'Class is
    begin
-      return Record_Definition'(Parent, Components);
+      return Record_Definition'(Parent, Components, Is_Abstract);
    end New_Record;
 
    --------------------

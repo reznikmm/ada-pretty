@@ -175,9 +175,10 @@ package Ada_Pretty is
       Is_Tagged : Boolean := False) return not null Node_Access;
 
    not overriding function New_Record
-     (Self       : access Factory;
-      Parent     : Node_Access := null;
-      Components : Node_Access := null) return not null Node_Access;
+     (Self        : access Factory;
+      Parent      : Node_Access := null;
+      Components  : Node_Access := null;
+      Is_Abstract : Boolean := False) return not null Node_Access;
 
    type Trilean is (False, True, Unspecified);
 
