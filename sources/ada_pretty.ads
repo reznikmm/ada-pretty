@@ -282,6 +282,13 @@ package Ada_Pretty is
      (Self       : access Factory;
       Expression : Node_Access := null) return not null Node_Access;
 
+   not overriding function New_Extended_Return
+     (Self            : access Factory;
+      Name            : not null Node_Access;
+      Type_Definition : not null Node_Access;
+      Initialization  : Node_Access := null;
+      Statements      : not null Node_Access) return not null Node_Access;
+
    not overriding function New_Statement
      (Self       : access Factory;
       Expression : Node_Access := null) return not null Node_Access;

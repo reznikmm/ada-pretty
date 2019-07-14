@@ -81,6 +81,48 @@ package body Ada_Pretty.Statements is
    --------------
 
    overriding function Document
+    (Self    : Extended_Return_Statement;
+     Printer : not null access League.Pretty_Printers.Printer'Class;
+     Pad     : Natural)
+      return League.Pretty_Printers.Document
+   is
+      Result : League.Pretty_Printers.Document := Printer.New_Document;
+   begin
+      Result.New_Line;
+      Result.Put ("return ");
+      Result.Append (Self.Name.Document (Printer, Pad));
+      Result.Put (" : ");
+      Result.Append (Self.Type_Definition.Document (Printer, Pad).Nest (2));
+
+      if Self.Initialization /= null then
+         declare
+            Init : League.Pretty_Printers.Document := Printer.New_Document;
+         begin
+            Init.New_Line;
+            Init.Append (Self.Initialization.Document (Printer, 0));
+            Init.Nest (2);
+            Init.Group;
+            Result.Put (" :=");
+            Result.Append (Init);
+         end;
+      end if;
+
+      Result.New_Line;
+      Result.Put ("do");
+
+      Result.Append (Self.Statements.Document (Printer, 0).Nest (3));
+
+      Result.New_Line;
+      Result.Put ("end return;");
+
+      return Result;
+   end Document;
+
+   --------------
+   -- Document --
+   --------------
+
+   overriding function Document
     (Self    : If_Statement;
      Printer : not null access League.Pretty_Printers.Printer'Class;
      Pad     : Natural)
@@ -220,6 +262,20 @@ package body Ada_Pretty.Statements is
    begin
       return Elsif_Statement'(Condition, List);
    end New_Elsif;
+
+   -------------------------
+   -- New_Extended_Return --
+   -------------------------
+
+   function New_Extended_Return
+     (Name            : not null Node_Access;
+      Type_Definition : not null Node_Access;
+      Initialization  : Node_Access;
+      Statements      : not null Node_Access) return Node'Class is
+   begin
+      return Extended_Return_Statement'
+        (Name, Type_Definition, Initialization, Statements);
+   end New_Extended_Return;
 
    ------------
    -- New_If --

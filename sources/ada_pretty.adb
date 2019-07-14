@@ -262,6 +262,24 @@ package body Ada_Pretty is
       return new Node'Class'(Statements.New_Elsif (Condition, List));
    end New_Elsif;
 
+   -------------------------
+   -- New_Extended_Return --
+   -------------------------
+
+   not overriding function New_Extended_Return
+     (Self            : access Factory;
+      Name            : not null Node_Access;
+      Type_Definition : not null Node_Access;
+      Initialization  : Node_Access := null;
+      Statements      : not null Node_Access) return not null Node_Access
+   is
+      pragma Unreferenced (Self);
+   begin
+      return new Node'Class'(Ada_Pretty.Statements.New_Extended_Return
+                             (Name, Type_Definition,
+                                Initialization, Statements));
+   end New_Extended_Return;
+
    ----------------------
    -- New_If_Statement --
    ----------------------

@@ -43,6 +43,14 @@ private package Ada_Pretty.Statements is
    function New_Return
      (Expression : not null Node_Access) return Node'Class;
 
+   type Extended_Return_Statement is new Node with private;
+
+   function New_Extended_Return
+     (Name            : not null Node_Access;
+      Type_Definition : not null Node_Access;
+      Initialization  : Node_Access;
+      Statements      : not null Node_Access) return Node'Class;
+
    type Statement is new Node with private;
 
    function New_Statement
@@ -113,6 +121,19 @@ private
 
    overriding function Document
     (Self    : Return_Statement;
+     Printer : not null access League.Pretty_Printers.Printer'Class;
+     Pad     : Natural)
+      return League.Pretty_Printers.Document;
+
+   type Extended_Return_Statement is new Node with record
+      Name            : not null Node_Access;
+      Type_Definition : not null Node_Access;
+      Initialization  : Node_Access;
+      Statements      : not null Node_Access;
+   end record;
+
+   overriding function Document
+    (Self    : Extended_Return_Statement;
      Printer : not null access League.Pretty_Printers.Printer'Class;
      Pad     : Natural)
       return League.Pretty_Printers.Document;
