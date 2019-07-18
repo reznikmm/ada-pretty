@@ -203,14 +203,15 @@ package body Ada_Pretty.Expressions is
      Pad     : Natural)
       return League.Pretty_Printers.Document
    is
+      pragma Unreferenced (Pad);
       --  Format this as
       --  Prefix
       --    .Selector
       Result : League.Pretty_Printers.Document := Printer.New_Document;
       Prefix : League.Pretty_Printers.Document :=
-        Self.Prefix.Document (Printer, Pad);
+        Self.Prefix.Document (Printer, 0);
       Selector : constant League.Pretty_Printers.Document :=
-        Self.Selector.Document (Printer, Pad);
+        Self.Selector.Document (Printer, 0);
    begin
       Result.New_Line (Gap => "");
       Result.Put (".");
