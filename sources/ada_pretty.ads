@@ -278,6 +278,12 @@ package Ada_Pretty is
       Elsif_List : Node_Access := null;
       Else_Path  : Node_Access := null) return not null Node_Access;
 
+   not overriding function New_For
+     (Self       : access Factory;
+      Name       : not null Node_Access;
+      Iterator   : not null Node_Access;
+      Statements : not null Node_Access) return not null Node_Access;
+
    not overriding function New_Return
      (Self       : access Factory;
       Expression : Node_Access := null) return not null Node_Access;

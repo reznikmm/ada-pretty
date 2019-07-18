@@ -38,6 +38,13 @@ private package Ada_Pretty.Statements is
       Elsif_List : Node_Access;
       Else_Path  : Node_Access) return Node'Class;
 
+   type For_Statement is new Node with private;
+
+   function New_For
+     (Name       : not null Node_Access;
+      Iterator   : not null Node_Access;
+      Statements : not null Node_Access) return Node'Class;
+
    type Return_Statement is new Node with private;
 
    function New_Return
@@ -111,6 +118,18 @@ private
 
    overriding function Document
     (Self    : If_Statement;
+     Printer : not null access League.Pretty_Printers.Printer'Class;
+     Pad     : Natural)
+      return League.Pretty_Printers.Document;
+
+   type For_Statement is new Node with record
+      Name       : not null Node_Access;
+      Iterator   : not null Node_Access;
+      Statements : not null Node_Access;
+   end record;
+
+   overriding function Document
+    (Self    : For_Statement;
      Printer : not null access League.Pretty_Printers.Printer'Class;
      Pad     : Natural)
       return League.Pretty_Printers.Document;

@@ -123,6 +123,41 @@ package body Ada_Pretty.Statements is
    --------------
 
    overriding function Document
+    (Self    : For_Statement;
+     Printer : not null access League.Pretty_Printers.Printer'Class;
+     Pad     : Natural)
+      return League.Pretty_Printers.Document
+   is
+      Result : League.Pretty_Printers.Document := Printer.New_Document;
+   begin
+      Result.New_Line;
+      Result.Put ("for ");
+      Result.Append (Self.Name.Document (Printer, Pad));
+
+      declare
+         Init : League.Pretty_Printers.Document := Printer.New_Document;
+      begin
+         Init.Put (" in ");
+         Init.Append (Self.Iterator.Document (Printer, 0).Nest (2));
+         Init.New_Line;
+         Init.Put ("loop");
+         Init.Group;
+         Result.Append (Init);
+      end;
+
+      Result.Append (Self.Statements.Document (Printer, 0).Nest (3));
+
+      Result.New_Line;
+      Result.Put ("end loop;");
+
+      return Result;
+   end Document;
+
+   --------------
+   -- Document --
+   --------------
+
+   overriding function Document
     (Self    : If_Statement;
      Printer : not null access League.Pretty_Printers.Printer'Class;
      Pad     : Natural)
@@ -276,6 +311,18 @@ package body Ada_Pretty.Statements is
       return Extended_Return_Statement'
         (Name, Type_Definition, Initialization, Statements);
    end New_Extended_Return;
+
+   -------------
+   -- New_For --
+   -------------
+
+   function New_For
+     (Name       : not null Node_Access;
+      Iterator   : not null Node_Access;
+      Statements : not null Node_Access) return Node'Class is
+   begin
+      return For_Statement'(Name, Iterator, Statements);
+   end New_For;
 
    ------------
    -- New_If --

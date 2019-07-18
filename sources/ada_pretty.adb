@@ -280,6 +280,22 @@ package body Ada_Pretty is
                                 Initialization, Statements));
    end New_Extended_Return;
 
+   -------------
+   -- New_For --
+   -------------
+
+   not overriding function New_For
+     (Self       : access Factory;
+      Name       : not null Node_Access;
+      Iterator   : not null Node_Access;
+      Statements : not null Node_Access) return not null Node_Access
+   is
+      pragma Unreferenced (Self);
+   begin
+      return new Node'Class'(Ada_Pretty.Statements.New_For
+                             (Name, Iterator, Statements));
+   end New_For;
+
    ----------------------
    -- New_If_Statement --
    ----------------------
