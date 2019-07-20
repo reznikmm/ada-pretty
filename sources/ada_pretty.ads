@@ -171,15 +171,17 @@ package Ada_Pretty is
       Parents    : Node_Access := null) return not null Node_Access;
 
    not overriding function New_Private_Record
-     (Self      : access Factory;
-      Is_Tagged : Boolean := False;
-      Parents   : Node_Access := null) return not null Node_Access;
+     (Self       : access Factory;
+      Is_Tagged  : Boolean := False;
+      Is_Limited : Boolean := False;
+      Parents    : Node_Access := null) return not null Node_Access;
 
    not overriding function New_Record
      (Self        : access Factory;
       Parent      : Node_Access := null;
       Components  : Node_Access := null;
-      Is_Abstract : Boolean := False) return not null Node_Access;
+      Is_Abstract : Boolean := False;
+      Is_Limited  : Boolean := False) return not null Node_Access;
 
    type Trilean is (False, True, Unspecified);
 

@@ -31,15 +31,17 @@ private package Ada_Pretty.Definitions is
    type Private_Record is new Node with private;
 
    function New_Private_Record
-     (Is_Tagged : Boolean;
-      Parents   : Node_Access) return Node'Class;
+     (Is_Tagged  : Boolean;
+      Is_Limited : Boolean;
+      Parents    : Node_Access) return Node'Class;
 
    type Record_Definition is new Node with private;
 
    function New_Record
      (Parent      : Node_Access := null;
       Components  : Node_Access;
-      Is_Abstract : Boolean) return Node'Class;
+      Is_Abstract : Boolean;
+      Is_Limited  : Boolean) return Node'Class;
 
    type Subprogram is new Node with private;
 
@@ -97,8 +99,9 @@ private
       return League.Pretty_Printers.Document;
 
    type Private_Record is new Node with record
-      Is_Tagged : Boolean;
-      Parents   : Node_Access := null;
+      Is_Tagged  : Boolean;
+      Is_Limited : Boolean;
+      Parents    : Node_Access := null;
    end record;
 
    overriding function Document
@@ -111,6 +114,7 @@ private
       Parent      : Node_Access;
       Components  : Node_Access;
       Is_Abstract : Boolean;
+      Is_Limited  : Boolean;
    end record;
 
    overriding function Document

@@ -109,6 +109,10 @@ package body Ada_Pretty.Definitions is
    is
       Result : League.Pretty_Printers.Document := Printer.New_Document;
    begin
+      if Self.Is_Limited then
+         Result.Put ("limited ");
+      end if;
+
       if Self.Parents /= null then
          Result.Put ("new ");
          Result.Append (Self.Parents.Document (Printer, Pad).Nest (2));
@@ -136,6 +140,10 @@ package body Ada_Pretty.Definitions is
    begin
       if Self.Is_Abstract then
          Result.Put ("abstract ");
+      end if;
+
+      if Self.Is_Limited then
+         Result.Put ("limited ");
       end if;
 
       if Self.Parent /= null then
@@ -268,10 +276,11 @@ package body Ada_Pretty.Definitions is
    ------------------------
 
    function New_Private_Record
-     (Is_Tagged : Boolean;
-      Parents   : Node_Access) return Node'Class is
+     (Is_Tagged  : Boolean;
+      Is_Limited : Boolean;
+      Parents    : Node_Access) return Node'Class is
    begin
-      return Private_Record'(Is_Tagged, Parents);
+      return Private_Record'(Is_Tagged, Is_Limited, Parents);
    end New_Private_Record;
 
    ----------------
@@ -281,9 +290,10 @@ package body Ada_Pretty.Definitions is
    function New_Record
      (Parent      : Node_Access := null;
       Components  : Node_Access;
-      Is_Abstract : Boolean) return Node'Class is
+      Is_Abstract : Boolean;
+      Is_Limited  : Boolean) return Node'Class is
    begin
-      return Record_Definition'(Parent, Components, Is_Abstract);
+      return Record_Definition'(Parent, Components, Is_Abstract, Is_Limited);
    end New_Record;
 
    --------------------

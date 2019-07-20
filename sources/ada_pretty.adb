@@ -529,14 +529,15 @@ package body Ada_Pretty is
    ------------------------
 
    not overriding function New_Private_Record
-     (Self      : access Factory;
-      Is_Tagged : Boolean := False;
-      Parents   : Node_Access := null) return not null Node_Access
+     (Self       : access Factory;
+      Is_Tagged  : Boolean := False;
+      Is_Limited : Boolean := False;
+      Parents    : Node_Access := null) return not null Node_Access
    is
       pragma Unreferenced (Self);
    begin
       return new Node'Class'(Definitions.New_Private_Record
-                               (Is_Tagged, Parents));
+                               (Is_Tagged, Is_Limited, Parents));
    end New_Private_Record;
 
    ----------------
@@ -544,15 +545,16 @@ package body Ada_Pretty is
    ----------------
 
    not overriding function New_Record
-     (Self       : access Factory;
-      Parent     : Node_Access := null;
-      Components : Node_Access := null;
-      Is_Abstract : Boolean := False) return not null Node_Access
+     (Self        : access Factory;
+      Parent      : Node_Access := null;
+      Components  : Node_Access := null;
+      Is_Abstract : Boolean := False;
+      Is_Limited  : Boolean := False) return not null Node_Access
    is
       pragma Unreferenced (Self);
    begin
       return new Node'Class'(Definitions.New_Record
-                               (Parent, Components, Is_Abstract));
+                               (Parent, Components, Is_Abstract, Is_Limited));
    end New_Record;
 
    ----------------
