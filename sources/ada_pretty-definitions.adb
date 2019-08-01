@@ -142,6 +142,10 @@ package body Ada_Pretty.Definitions is
          Result.Put ("abstract ");
       end if;
 
+      if Self.Is_Tagged then
+         Result.Put ("tagged ");
+      end if;
+
       if Self.Is_Limited then
          Result.Put ("limited ");
       end if;
@@ -291,9 +295,11 @@ package body Ada_Pretty.Definitions is
      (Parent      : Node_Access := null;
       Components  : Node_Access;
       Is_Abstract : Boolean;
+      Is_Tagged   : Boolean;
       Is_Limited  : Boolean) return Node'Class is
    begin
-      return Record_Definition'(Parent, Components, Is_Abstract, Is_Limited);
+      return Record_Definition'
+        (Parent, Components, Is_Abstract, Is_Tagged, Is_Limited);
    end New_Record;
 
    --------------------

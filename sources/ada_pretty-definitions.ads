@@ -41,6 +41,7 @@ private package Ada_Pretty.Definitions is
      (Parent      : Node_Access := null;
       Components  : Node_Access;
       Is_Abstract : Boolean;
+      Is_Tagged   : Boolean;
       Is_Limited  : Boolean) return Node'Class;
 
    type Subprogram is new Node with private;
@@ -114,6 +115,7 @@ private
       Parent      : Node_Access;
       Components  : Node_Access;
       Is_Abstract : Boolean;
+      Is_Tagged   : Boolean;
       Is_Limited  : Boolean;
    end record;
 

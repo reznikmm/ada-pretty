@@ -549,12 +549,14 @@ package body Ada_Pretty is
       Parent      : Node_Access := null;
       Components  : Node_Access := null;
       Is_Abstract : Boolean := False;
+      Is_Tagged   : Boolean := False;
       Is_Limited  : Boolean := False) return not null Node_Access
    is
       pragma Unreferenced (Self);
    begin
       return new Node'Class'(Definitions.New_Record
-                               (Parent, Components, Is_Abstract, Is_Limited));
+                             (Parent, Components,
+                                Is_Abstract, Is_Tagged, Is_Limited));
    end New_Record;
 
    ----------------
