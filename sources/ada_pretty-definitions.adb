@@ -109,17 +109,23 @@ package body Ada_Pretty.Definitions is
    is
       Result : League.Pretty_Printers.Document := Printer.New_Document;
    begin
-      if Self.Is_Limited then
-         Result.Put ("limited ");
-      end if;
-
       if Self.Parents /= null then
+         if Self.Is_Limited then
+            Result.Put ("limited ");
+         end if;
+
          Result.Put ("new ");
          Result.Append (Self.Parents.Document (Printer, Pad).Nest (2));
          Result.New_Line;
          Result.Put ("with ");
-      elsif Self.Is_Tagged then
-         Result.Put ("tagged ");
+      else
+         if Self.Is_Tagged then
+            Result.Put ("tagged ");
+         end if;
+
+         if Self.Is_Limited then
+            Result.Put ("limited ");
+         end if;
       end if;
 
       Result.Put ("private");
