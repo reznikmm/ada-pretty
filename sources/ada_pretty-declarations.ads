@@ -104,7 +104,7 @@ private
      Pad     : Natural)
       return League.Pretty_Printers.Document;
 
-   type Package_Instantiation is new Node with record
+   type Package_Instantiation is new Declaration with record
       Name        : not null Node_Access;
       Template    : not null Node_Access;
       Actual_Part : Node_Access;

@@ -73,6 +73,7 @@ package body Ada_Pretty.Declarations is
       Definition.Put ("new ");
       Definition.Append (Self.Template.Document (Printer, 0).Nest (2));
       Definition.Append (Actual_Part);
+      Definition.Nest (2);
       Definition.Group;
 
       Result.New_Line;
