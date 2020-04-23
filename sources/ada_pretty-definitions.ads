@@ -44,6 +44,12 @@ private package Ada_Pretty.Definitions is
       Is_Tagged   : Boolean;
       Is_Limited  : Boolean) return Node'Class;
 
+   type Array_Definition is new Node with private;
+
+   function New_Array
+     (Indexes   : not null Node_Access;
+      Component : not null Node_Access) return Node'Class;
+
    type Subprogram is new Node with private;
 
    function Name (Self : Subprogram) return Node_Access;
@@ -121,6 +127,17 @@ private
 
    overriding function Document
     (Self    : Record_Definition;
+     Printer : not null access League.Pretty_Printers.Printer'Class;
+     Pad     : Natural)
+      return League.Pretty_Printers.Document;
+
+   type Array_Definition is new Node with record
+      Indexes   : not null Node_Access;
+      Component : not null Node_Access;
+   end record;
+
+   overriding function Document
+    (Self    : Array_Definition;
      Printer : not null access League.Pretty_Printers.Printer'Class;
      Pad     : Natural)
       return League.Pretty_Printers.Document;

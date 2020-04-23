@@ -146,6 +146,20 @@ package body Ada_Pretty is
                              (Choice, Value));
    end New_Argument_Association;
 
+   ---------------
+   -- New_Array --
+   ---------------
+
+   not overriding function New_Array
+     (Self      : access Factory;
+      Indexes   : not null Node_Access;
+      Component : not null Node_Access) return not null Node_Access
+   is
+      pragma Unreferenced (Self);
+   begin
+      return new Node'Class'(Definitions.New_Array (Indexes, Component));
+   end New_Array;
+
    ----------------
    -- New_Aspect --
    ----------------

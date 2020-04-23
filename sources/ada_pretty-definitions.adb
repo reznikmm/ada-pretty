@@ -38,6 +38,37 @@ package body Ada_Pretty.Definitions is
    --------------
 
    overriding function Document
+    (Self    : Array_Definition;
+     Printer : not null access League.Pretty_Printers.Printer'Class;
+     Pad     : Natural)
+      return League.Pretty_Printers.Document
+   is
+      pragma Unreferenced (Pad);
+      Indexes : League.Pretty_Printers.Document := Printer.New_Document;
+      Result  : League.Pretty_Printers.Document := Printer.New_Document;
+      Comp    : League.Pretty_Printers.Document := Printer.New_Document;
+   begin
+      Indexes.New_Line;
+      Indexes.Put ("(");
+      Indexes.Append (Self.Indexes.Document (Printer, 0).Nest (1));
+      Indexes.Put (")");
+      Indexes.Nest (2);
+      Comp.New_Line;
+      Comp.Append (Self.Component.Document (Printer, 0).Nest (2));
+      Result.Put ("array");
+      Result.Append (Indexes);
+      Result.Put (" of");
+      Result.Append (Comp);
+      Result.Group;
+
+      return Result;
+   end Document;
+
+   --------------
+   -- Document --
+   --------------
+
+   overriding function Document
     (Self    : Derived;
      Printer : not null access League.Pretty_Printers.Printer'Class;
      Pad     : Natural)
@@ -249,6 +280,17 @@ package body Ada_Pretty.Definitions is
    begin
       return Access_Definition'(Modifier, Target);
    end New_Access;
+
+   ---------------
+   -- New_Array --
+   ---------------
+
+   function New_Array
+     (Indexes   : not null Node_Access;
+      Component : not null Node_Access) return Node'Class is
+   begin
+      return Array_Definition'(Indexes, Component);
+   end New_Array;
 
    -----------------
    -- New_Derived --

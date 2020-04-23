@@ -192,6 +192,11 @@ package Ada_Pretty is
       Is_Tagged   : Boolean := False;
       Is_Limited  : Boolean := False) return not null Node_Access;
 
+   not overriding function New_Array
+     (Self      : access Factory;
+      Indexes   : not null Node_Access;
+      Component : not null Node_Access) return not null Node_Access;
+
    type Trilean is (False, True, Unspecified);
 
    not overriding function New_Subprogram_Specification
