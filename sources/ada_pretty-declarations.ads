@@ -20,6 +20,14 @@ private package Ada_Pretty.Declarations is
       Private_Part : Node_Access;
       Comment      : League.Strings.Universal_String) return Node'Class;
 
+   type Package_Instantiation is new Node with private;
+
+   function New_Package_Instantiation
+     (Name        : not null Node_Access;
+      Template    : not null Node_Access;
+      Actual_Part : Node_Access;
+      Comment     : League.Strings.Universal_String) return Node'Class;
+
    type Parameter is new Node with private;
 
    function New_Parameter
@@ -92,6 +100,19 @@ private
 
    overriding function Document
     (Self    : Package_Spec;
+     Printer : not null access League.Pretty_Printers.Printer'Class;
+     Pad     : Natural)
+      return League.Pretty_Printers.Document;
+
+   type Package_Instantiation is new Node with record
+      Name        : not null Node_Access;
+      Template    : not null Node_Access;
+      Actual_Part : Node_Access;
+      Comment     : League.Strings.Universal_String;
+   end record;
+
+   overriding function Document
+    (Self    : Package_Instantiation;
      Printer : not null access League.Pretty_Printers.Printer'Class;
      Pad     : Natural)
       return League.Pretty_Printers.Document;

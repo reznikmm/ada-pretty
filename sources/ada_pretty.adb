@@ -472,6 +472,24 @@ package body Ada_Pretty is
                              (Name, List));
    end New_Package_Body;
 
+   -------------------------------
+   -- New_Package_Instantiation --
+   -------------------------------
+
+   not overriding function New_Package_Instantiation
+     (Self        : access Factory;
+      Name        : not null Node_Access;
+      Template    : not null Node_Access;
+      Actual_Part : Node_Access := null;
+      Comment     : League.Strings.Universal_String :=
+        League.Strings.Empty_Universal_String) return not null Node_Access
+   is
+      pragma Unreferenced (Self);
+   begin
+      return new Node'Class'(Declarations.New_Package_Instantiation
+                             (Name, Template, Actual_Part, Comment));
+   end New_Package_Instantiation;
+
    -------------------
    -- New_Parameter --
    -------------------

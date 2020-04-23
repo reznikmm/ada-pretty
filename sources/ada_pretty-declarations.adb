@@ -51,6 +51,44 @@ package body Ada_Pretty.Declarations is
    --------------
 
    overriding function Document
+    (Self    : Package_Instantiation;
+     Printer : not null access League.Pretty_Printers.Printer'Class;
+     Pad     : Natural)
+     return League.Pretty_Printers.Document
+   is
+      Result : League.Pretty_Printers.Document := Printer.New_Document;
+      Definition : League.Pretty_Printers.Document := Printer.New_Document;
+      Actual_Part : League.Pretty_Printers.Document := Printer.New_Document;
+      Name : constant League.Pretty_Printers.Document :=
+        Self.Name.Document (Printer, Pad);
+   begin
+      Actual_Part.New_Line;
+      Actual_Part.Put ("(");
+      Actual_Part.Append (Self.Actual_Part.Document (Printer, 0).Nest (1));
+      Actual_Part.Put (");");
+      Actual_Part.Nest (2);
+      Actual_Part.Group;
+
+      Definition.New_Line;
+      Definition.Put ("new ");
+      Definition.Append (Self.Template.Document (Printer, 0).Nest (2));
+      Definition.Append (Actual_Part);
+      Definition.Group;
+
+      Result.New_Line;
+      Result.Put ("package ");
+      Result.Append (Name);
+      Result.Put (" is");
+      Result.Append (Definition);
+
+      return Result;
+   end Document;
+
+   --------------
+   -- Document --
+   --------------
+
+   overriding function Document
     (Self    : Package_Spec;
      Printer : not null access League.Pretty_Printers.Printer'Class;
      Pad     : Natural)
@@ -391,6 +429,19 @@ package body Ada_Pretty.Declarations is
    begin
       return Package_Body'(Name, List);
    end New_Package_Body;
+
+   -------------------------------
+   -- New_Package_Instantiation --
+   -------------------------------
+
+   function New_Package_Instantiation
+     (Name        : not null Node_Access;
+      Template    : not null Node_Access;
+      Actual_Part : Node_Access;
+      Comment     : League.Strings.Universal_String) return Node'Class is
+   begin
+      return Package_Instantiation'(Name, Template, Actual_Part, Comment);
+   end New_Package_Instantiation;
 
    -------------------
    -- New_Parameter --

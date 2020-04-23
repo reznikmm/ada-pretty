@@ -90,6 +90,14 @@ package Ada_Pretty is
       Name : not null Node_Access;
       List : Node_Access := null) return not null Node_Access;
 
+   not overriding function New_Package_Instantiation
+     (Self        : access Factory;
+      Name        : not null Node_Access;
+      Template    : not null Node_Access;
+      Actual_Part : Node_Access := null;
+      Comment     : League.Strings.Universal_String :=
+        League.Strings.Empty_Universal_String) return not null Node_Access;
+
    not overriding function New_Parameter
      (Self            : access Factory;
       Name            : not null Node_Access;
