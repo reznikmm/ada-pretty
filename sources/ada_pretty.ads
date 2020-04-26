@@ -206,7 +206,7 @@ package Ada_Pretty is
       Parameters    : Node_Access := null;
       Result        : Node_Access := null) return not null Node_Access;
 
-   --  Expressions ad Names
+   --  Expressions and Names
 
    not overriding function New_Apply
      (Self      : access Factory;
@@ -215,6 +215,11 @@ package Ada_Pretty is
    --  This node represent construction in form 'prefix (arguments)'
    --  This includes function_call, indexed_component, slice,
    --  subtype_indication, etc
+
+   not overriding function New_Qualified_Expession
+     (Self     : access Factory;
+      Prefix   : not null Node_Access;
+      Argument : not null Node_Access) return not null Node_Access;
 
    not overriding function New_Infix
      (Self     : access Factory;

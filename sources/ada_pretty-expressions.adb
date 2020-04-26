@@ -16,7 +16,7 @@ package body Ada_Pretty.Expressions is
       Pad     : Natural)
       return League.Pretty_Printers.Document
    is
-      --  Format thi as
+      --  Format this as
       --  Prefix
       --    (Arguments)
       pragma Unreferenced (Pad);
@@ -29,6 +29,36 @@ package body Ada_Pretty.Expressions is
       Result.Append (Self.Arguments.Document (Printer, 0).Nest (1));
       Result.Put (")");
       Result.Nest (2);
+      Prefix.Append (Result);
+      Prefix.Group;
+
+      return Prefix;
+   end Document;
+
+   --------------
+   -- Document --
+   --------------
+
+   overriding function Document
+     (Self    : Qualified;
+      Printer : not null access League.Pretty_Printers.Printer'Class;
+      Pad     : Natural)
+      return League.Pretty_Printers.Document
+   is
+      --  Format this as Prefix'(Arguments) or
+      --  Prefix'
+      --    (Arguments)
+      pragma Unreferenced (Pad);
+      Prefix : League.Pretty_Printers.Document :=
+        Self.Prefix.Document (Printer, 0);
+      Result : League.Pretty_Printers.Document := Printer.New_Document;
+   begin
+      Result.New_Line (Gap => "");
+      Result.Put ("(");
+      Result.Append (Self.Argument.Document (Printer, 0).Nest (1));
+      Result.Put (")");
+      Result.Nest (2);
+      Prefix.Put ("'");
       Prefix.Append (Result);
       Prefix.Group;
 
@@ -367,6 +397,17 @@ package body Ada_Pretty.Expressions is
    begin
       return Expressions.Parentheses'(Child => Child);
    end New_Parentheses;
+
+   -------------------
+   -- New_Qualified --
+   -------------------
+
+   function New_Qualified
+     (Prefix   : not null Node_Access;
+      Argument : not null Node_Access) return Node'Class is
+   begin
+      return Expressions.Qualified'(Prefix, Argument);
+   end New_Qualified;
 
    -----------------------
    -- New_Selected_Name --

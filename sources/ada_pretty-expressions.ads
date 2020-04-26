@@ -12,6 +12,12 @@ private package Ada_Pretty.Expressions is
      (Prefix    : not null Node_Access;
       Arguments : not null Node_Access) return Node'Class;
 
+   type Qualified is new Node with private;
+
+   function New_Qualified
+     (Prefix   : not null Node_Access;
+      Argument : not null Node_Access) return Node'Class;
+
    type Infix is new Node with private;
 
    function New_Infix
@@ -74,6 +80,17 @@ private
 
    overriding function Document
     (Self    : Apply;
+     Printer : not null access League.Pretty_Printers.Printer'Class;
+     Pad     : Natural)
+      return League.Pretty_Printers.Document;
+
+   type Qualified is new Node with record
+      Prefix   : not null Node_Access;
+      Argument : not null Node_Access;
+   end record;
+
+   overriding function Document
+    (Self    : Qualified;
      Printer : not null access League.Pretty_Printers.Printer'Class;
      Pad     : Natural)
       return League.Pretty_Printers.Document;

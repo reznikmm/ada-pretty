@@ -587,6 +587,20 @@ package body Ada_Pretty is
                                (Is_Tagged, Is_Limited, Parents));
    end New_Private_Record;
 
+   -----------------------------
+   -- New_Qualified_Expession --
+   -----------------------------
+
+   not overriding function New_Qualified_Expession
+     (Self     : access Factory;
+      Prefix   : not null Node_Access;
+      Argument : not null Node_Access) return not null Node_Access
+   is
+      pragma Unreferenced (Self);
+   begin
+      return new Node'Class'(Expressions.New_Qualified (Prefix, Argument));
+   end New_Qualified_Expession;
+
    ----------------
    -- New_Record --
    ----------------
