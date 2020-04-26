@@ -424,6 +424,21 @@ package body Ada_Pretty is
    end New_Literal;
 
    --------------
+   -- New_Loop --
+   --------------
+
+   not overriding function New_Loop
+     (Self       : access Factory;
+      Condition  : Node_Access;
+      Statements : not null Node_Access) return not null Node_Access
+   is
+      pragma Unreferenced (Self);
+   begin
+      return new Node'Class'(Ada_Pretty.Statements.New_Loop
+                             (Condition, Statements));
+   end New_Loop;
+
+   --------------
    -- New_Name --
    --------------
 

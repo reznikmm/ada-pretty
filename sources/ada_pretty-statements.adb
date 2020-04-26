@@ -158,6 +158,40 @@ package body Ada_Pretty.Statements is
    --------------
 
    overriding function Document
+    (Self    : Loop_Statement;
+     Printer : not null access League.Pretty_Printers.Printer'Class;
+     Pad     : Natural)
+      return League.Pretty_Printers.Document
+   is
+      Result : League.Pretty_Printers.Document := Printer.New_Document;
+      Init   : League.Pretty_Printers.Document := Printer.New_Document;
+   begin
+      Result.New_Line;
+
+      if Self.Condition = null then
+         Result.Put ("loop");
+      else
+         Init.Put ("while ");
+         Init.Append (Self.Condition.Document (Printer, Pad).Nest (2));
+         Init.New_Line;
+         Init.Put ("loop");
+         Init.Group;
+         Result.Append (Init);
+      end if;
+
+      Result.Append (Self.Statements.Document (Printer, 0).Nest (3));
+
+      Result.New_Line;
+      Result.Put ("end loop;");
+
+      return Result;
+   end Document;
+
+   --------------
+   -- Document --
+   --------------
+
+   overriding function Document
     (Self    : If_Statement;
      Printer : not null access League.Pretty_Printers.Printer'Class;
      Pad     : Natural)
@@ -244,11 +278,17 @@ package body Ada_Pretty.Statements is
       return League.Pretty_Printers.Document
    is
       Result : League.Pretty_Printers.Document := Printer.New_Document;
+      Right  : League.Pretty_Printers.Document := Printer.New_Document;
    begin
       Result.New_Line;
       Result.Append (Self.Left.Document (Printer, Pad));
-      Result.Put (" := ");
-      Result.Append (Self.Right.Document (Printer, Pad));
+      Result.Put (" :=");
+
+      Right.New_Line;
+      Right.Append (Self.Right.Document (Printer, Pad));
+      Right.Nest (2);
+      Right.Group;
+      Result.Append (Right);
 
       Result.Put (";");
       return Result;
@@ -336,6 +376,17 @@ package body Ada_Pretty.Statements is
    begin
       return If_Statement'(Condition, Then_Path, Elsif_List, Else_Path);
    end New_If;
+
+   --------------
+   -- New_Loop --
+   --------------
+
+   function New_Loop
+     (Condition  : Node_Access;
+      Statements : not null Node_Access) return Node'Class is
+   begin
+      return Loop_Statement'(Condition, Statements);
+   end New_Loop;
 
    ----------------
    -- New_Return --

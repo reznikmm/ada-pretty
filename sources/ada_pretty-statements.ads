@@ -45,6 +45,12 @@ private package Ada_Pretty.Statements is
       Iterator   : not null Node_Access;
       Statements : not null Node_Access) return Node'Class;
 
+   type Loop_Statement is new Node with private;
+
+   function New_Loop
+     (Condition  : Node_Access;
+      Statements : not null Node_Access) return Node'Class;
+
    type Return_Statement is new Node with private;
 
    function New_Return
@@ -130,6 +136,17 @@ private
 
    overriding function Document
     (Self    : For_Statement;
+     Printer : not null access League.Pretty_Printers.Printer'Class;
+     Pad     : Natural)
+      return League.Pretty_Printers.Document;
+
+   type Loop_Statement is new Node with record
+      Condition  : Node_Access;
+      Statements : not null Node_Access;
+   end record;
+
+   overriding function Document
+    (Self    : Loop_Statement;
      Printer : not null access League.Pretty_Printers.Printer'Class;
      Pad     : Natural)
       return League.Pretty_Printers.Document;

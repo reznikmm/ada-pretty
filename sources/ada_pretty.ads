@@ -300,6 +300,11 @@ package Ada_Pretty is
       Iterator   : not null Node_Access;
       Statements : not null Node_Access) return not null Node_Access;
 
+   not overriding function New_Loop
+     (Self       : access Factory;
+      Condition  : Node_Access;
+      Statements : not null Node_Access) return not null Node_Access;
+
    not overriding function New_Return
      (Self       : access Factory;
       Expression : Node_Access := null) return not null Node_Access;
