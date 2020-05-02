@@ -393,7 +393,7 @@ package body Ada_Pretty.Statements is
    ----------------
 
    function New_Return
-     (Expression : not null Node_Access) return Node'Class is
+     (Expression : Node_Access) return Node'Class is
    begin
       return Return_Statement'(Expression => Expression);
    end New_Return;

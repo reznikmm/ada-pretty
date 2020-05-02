@@ -54,7 +54,7 @@ private package Ada_Pretty.Statements is
    type Return_Statement is new Node with private;
 
    function New_Return
-     (Expression : not null Node_Access) return Node'Class;
+     (Expression : Node_Access) return Node'Class;
 
    type Extended_Return_Statement is new Node with private;
 
