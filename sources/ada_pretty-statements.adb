@@ -11,6 +11,53 @@ package body Ada_Pretty.Statements is
    --------------
 
    overriding function Document
+    (Self    : Block_Statement;
+     Printer : not null access League.Pretty_Printers.Printer'Class;
+     Pad     : Natural)
+      return League.Pretty_Printers.Document
+   is
+      pragma Unreferenced (Pad);
+      Result : League.Pretty_Printers.Document := Printer.New_Document;
+   begin
+      if Self.Declarations /= null then
+         Result.New_Line;
+         Result.Put ("declare");
+         Result.Append (Self.Declarations.Document (Printer, 0).Nest (3));
+      end if;
+
+      Result.New_Line;
+      Result.Put ("begin");
+
+      if Self.Statements = null then
+         declare
+            Nil : League.Pretty_Printers.Document := Printer.New_Document;
+         begin
+            Nil.New_Line;
+            Nil.Put ("null;");
+            Nil.Nest (3);
+            Result.Append (Nil);
+         end;
+      else
+         Result.Append (Self.Statements.Document (Printer, 0).Nest (3));
+      end if;
+
+      if Self.Exceptions /= null then
+         Result.New_Line;
+         Result.Put ("exception");
+         Result.Append (Self.Exceptions.Document (Printer, 0).Nest (3));
+      end if;
+
+      Result.New_Line;
+      Result.Put ("end;");
+
+      return Result;
+   end Document;
+
+   --------------
+   -- Document --
+   --------------
+
+   overriding function Document
     (Self    : Case_Statement;
      Printer : not null access League.Pretty_Printers.Printer'Class;
      Pad     : Natural)
@@ -304,6 +351,18 @@ package body Ada_Pretty.Statements is
    begin
       return Assignment'(Left, Right);
    end New_Assignment;
+
+   -------------------------
+   -- New_Block_Statement --
+   -------------------------
+
+   function New_Block_Statement
+     (Declarations : Node_Access;
+      Statements   : Node_Access;
+      Exceptions   : Node_Access) return Node'Class is
+   begin
+      return Block_Statement'(Declarations, Statements, Exceptions);
+   end New_Block_Statement;
 
    --------------
    -- New_Case --

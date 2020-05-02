@@ -69,6 +69,13 @@ private package Ada_Pretty.Statements is
    function New_Statement
      (Expression : Node_Access) return Node'Class;
 
+   type Block_Statement is new Node with private;
+
+   function New_Block_Statement
+     (Declarations : Node_Access;
+      Statements   : Node_Access;
+      Exceptions   : Node_Access) return Node'Class;
+
 private
 
    type Assignment is new Node with record
@@ -180,6 +187,18 @@ private
 
    overriding function Document
     (Self    : Statement;
+     Printer : not null access League.Pretty_Printers.Printer'Class;
+     Pad     : Natural)
+      return League.Pretty_Printers.Document;
+
+   type Block_Statement is new Node with record
+      Declarations : Node_Access;
+      Statements   : Node_Access;
+      Exceptions   : Node_Access;
+   end record;
+
+   overriding function Document
+    (Self    : Block_Statement;
      Printer : not null access League.Pretty_Printers.Printer'Class;
      Pad     : Natural)
       return League.Pretty_Printers.Document;

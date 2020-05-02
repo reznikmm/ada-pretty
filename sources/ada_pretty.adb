@@ -188,6 +188,22 @@ package body Ada_Pretty is
       return new Node'Class'(Statements.New_Assignment (Left, Right));
    end New_Assignment;
 
+   ---------------
+   -- New_Block --
+   ---------------
+
+   not overriding function New_Block
+     (Self         : access Factory;
+      Declarations : Node_Access := null;
+      Statements   : Node_Access := null;
+      Exceptions   : Node_Access := null) return not null Node_Access
+   is
+      pragma Unreferenced (Self);
+   begin
+      return new Node'Class'(Ada_Pretty.Statements.New_Block_Statement
+                               (Declarations, Statements, Exceptions));
+   end New_Block;
+
    --------------
    -- New_Case --
    --------------

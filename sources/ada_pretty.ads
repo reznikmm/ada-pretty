@@ -325,6 +325,12 @@ package Ada_Pretty is
      (Self       : access Factory;
       Expression : Node_Access := null) return not null Node_Access;
 
+   not overriding function New_Block
+     (Self         : access Factory;
+      Declarations : Node_Access := null;
+      Statements   : Node_Access := null;
+      Exceptions   : Node_Access := null) return not null Node_Access;
+
 private
    type Node is abstract tagged null record;
 
