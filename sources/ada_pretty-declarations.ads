@@ -73,6 +73,7 @@ private package Ada_Pretty.Declarations is
      (Name            : not null Node_Access;
       Type_Definition : Node_Access;
       Initialization  : Node_Access;
+      Rename          : Node_Access;
       Is_Constant     : Boolean;
       Is_Aliased      : Boolean;
       Aspects         : Node_Access;
@@ -190,6 +191,7 @@ private
       Name            : not null Node_Access;
       Type_Definition : Node_Access;
       Initialization  : Node_Access;
+      Rename          : Node_Access;
       Is_Constant     : Boolean;
       Is_Aliased      : Boolean;
       Aspects         : Node_Access;

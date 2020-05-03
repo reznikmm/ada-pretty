@@ -149,6 +149,7 @@ package Ada_Pretty is
       Name            : not null Node_Access;
       Type_Definition : Node_Access := null;
       Initialization  : Node_Access := null;
+      Rename          : Node_Access := null;
       Is_Constant     : Boolean := False;
       Is_Aliased      : Boolean := False;
       Aspects         : Node_Access := null;

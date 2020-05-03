@@ -374,6 +374,17 @@ package body Ada_Pretty.Declarations is
             Result.Put (" :=");
             Result.Append (Init);
          end;
+      elsif Self.Rename /= null then
+         declare
+            Init : League.Pretty_Printers.Document := Printer.New_Document;
+         begin
+            Init.New_Line;
+            Init.Append (Self.Rename.Document (Printer, 0));
+            Init.Nest (2);
+            Init.Group;
+            Result.Put (" renames");
+            Result.Append (Init);
+         end;
       end if;
 
       Result.Append (Print_Aspect (Self.Aspects, Printer));
@@ -528,6 +539,7 @@ package body Ada_Pretty.Declarations is
      (Name            : not null Node_Access;
       Type_Definition : Node_Access;
       Initialization  : Node_Access;
+      Rename          : Node_Access;
       Is_Constant     : Boolean;
       Is_Aliased      : Boolean;
       Aspects         : Node_Access;
@@ -537,6 +549,7 @@ package body Ada_Pretty.Declarations is
         (Name,
          Type_Definition,
          Initialization,
+         Rename,
          Is_Constant,
          Is_Aliased,
          Aspects,
