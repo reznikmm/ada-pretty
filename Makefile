@@ -13,6 +13,7 @@ GPRINSTALL_FLAGS = --prefix=$(PREFIX) --sources-subdir=$(INSTALL_INCLUDE_DIR)\
 
 all:
 	gprbuild $(GPRBUILD_FLAGS) -P gnat/ada_pretty.gpr
+	gprbuild $(GPRBUILD_FLAGS) -P gnat/ada_pretty_test.gpr
 
 install:
 	gprinstall $(GPRINSTALL_FLAGS) -p -P gnat/ada_pretty.gpr
