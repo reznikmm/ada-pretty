@@ -49,7 +49,7 @@ procedure Ada_Output_Test is
 
       QString_Access : constant Ada_Pretty.Node_Access := F.New_Type
         (Name       => F.New_Name (+"QString_Access"),
-         Definition => F.New_Access (True, QString),
+         Definition => F.New_Access (Ada_Pretty.Access_All, QString),
          Aspects    => Convention);
 
       Link_Name : constant Ada_Pretty.Node_Access := F.New_Aspect
@@ -144,19 +144,19 @@ procedure Ada_Output_Test is
 
       Initialize : constant Ada_Pretty.Node_Access :=
         F.New_Subprogram_Specification
-          (Is_Overriding => True,
+          (Is_Overriding => Ada_Pretty.True,
            Name          => F.New_Name (+"Initialize"),
            Parameters    => Self_Q_String);
 
       Adjust : constant Ada_Pretty.Node_Access :=
         F.New_Subprogram_Specification
-          (Is_Overriding => True,
+          (Is_Overriding => Ada_Pretty.True,
            Name          => F.New_Name (+"Adjust"),
            Parameters    => Self_Q_String);
 
       Finalize : constant Ada_Pretty.Node_Access :=
         F.New_Subprogram_Specification
-          (Is_Overriding => True,
+          (Is_Overriding => Ada_Pretty.True,
            Name          => F.New_Name (+"Finalize"),
            Parameters    => Self_Q_String);
 
