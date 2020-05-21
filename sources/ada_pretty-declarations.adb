@@ -304,15 +304,20 @@ package body Ada_Pretty.Declarations is
    is
       pragma Unreferenced (Pad);
       Result : League.Pretty_Printers.Document := Printer.New_Document;
+      Params : League.Pretty_Printers.Document := Printer.New_Document;
    begin
       Result.New_Line;
       Result.Put ("type ");
       Result.Append (Self.Name.Document (Printer, 0));
 
       if Self.Discriminants /= null then
-         Result.Put (" (");
-         Result.Append (Self.Discriminants.Document (Printer, 0));
-         Result.Put (")");
+         Params.New_Line;
+         Params.Put (" (");
+         Params.Append (Self.Discriminants.Document (Printer, 0).Nest (1));
+         Params.Put (")");
+         Params.Nest (1);
+         Params.Group;
+         Result.Append (Params);
       end if;
 
       if Self.Definition /= null then

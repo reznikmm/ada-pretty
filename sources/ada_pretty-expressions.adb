@@ -212,9 +212,10 @@ package body Ada_Pretty.Expressions is
      Pad     : Natural)
       return League.Pretty_Printers.Document
    is
+      pragma Unreferenced (Pad);
       Result  : League.Pretty_Printers.Document := Printer.New_Document;
       Child   : constant League.Pretty_Printers.Document :=
-        Self.Child.Document (Printer, Pad);
+        Self.Child.Document (Printer, 0);
    begin
       Result.Put ("(");
       Result.Append (Child.Nest (1));
