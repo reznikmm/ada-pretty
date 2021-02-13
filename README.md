@@ -2,7 +2,7 @@ Ada Pretty Printer Library _(ada-pretty)_
 =========================================
 
 [![Build](https://github.com/reznikmm/ada-pretty/workflows/Build/badge.svg)](https://github.com/reznikmm/ada-pretty/actions)
-[![Download](https://api.bintray.com/packages/reznikmm/matreshka/ada-pretty/images/download.svg) ](https://bintray.com/reznikmm/matreshka/ada-pretty/_latestVersion)
+[![Copr build status](https://copr.fedorainfracloud.org/coprs/reznik/ada/package/ada-pretty/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/reznik/ada/)
 [![reuse compliant](https://img.shields.io/badge/reuse-compliant-green.svg)](https://reuse.software/)
 
 > Pretty printing library for Ada
