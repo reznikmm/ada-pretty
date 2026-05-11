@@ -1,3 +1,8 @@
+--  Copyright (c) 2017-2026 Maxim Reznik <reznikmm@gmail.com>
+--
+--  SPDX-License-Identifier: MIT
+-------------------------------------------------------------
+
 with Ada.Characters.Wide_Wide_Latin_1;
 with Ada.Wide_Wide_Text_IO;
 
@@ -262,7 +267,8 @@ procedure Ada_Output_Test is
               List      => F.New_Statement
                 (F.New_Apply
                      (F.New_Name (+"QString_finalize"),
-                      Self_QString_View))));
+                      Self_QString_View))),
+           Else_Path  => F.New_Return);
 
       Finalize_Body : constant Ada_Pretty.Node_Access :=
         F.New_Subprogram_Body

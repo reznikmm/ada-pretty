@@ -1,4 +1,4 @@
---  Copyright (c) 2017 Maxim Reznik <reznikmm@gmail.com>
+--  Copyright (c) 2017-2026 Maxim Reznik <reznikmm@gmail.com>
 --
 --  SPDX-License-Identifier: MIT
 --  License-Filename: LICENSE
@@ -258,6 +258,8 @@ package body Ada_Pretty.Statements is
       end if;
 
       if Self.Else_Path /= null then
+         Result.New_Line;
+         Result.Put ("else");
          Result.Append (Self.Else_Path.Document (Printer, Pad).Nest (3));
       end if;
 
