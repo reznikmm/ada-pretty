@@ -1,0 +1,24 @@
+description = "Ada Pretty Printer Library"
+name = "ada_pretty"
+version = "1.0.1"
+website = "https://github.com/reznikmm/ada-pretty/"
+authors = ["Maxim Reznik"]
+licenses = "MIT"
+maintainers = ["Maxim Reznik <reznikmm@gmail.com>"]
+maintainers-logins = ["reznikmm"]
+project-files = ["gnat/ada_pretty.gpr"]
+tags = ["pretty", "printing", "generator"]
+
+[[depends-on]]
+matreshka_league = "^21"
+
+[configuration]
+output_dir = "gnat"
+generate_ada = false
+generate_c = false
+
+[build-switches]
+development.optimization = ["-O0"]
+development.style_checks = ["-gnaty", "-gnaty-B"]
+development.contracts = "Yes"
+"*".debug_info = "Yes"

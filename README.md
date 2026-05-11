@@ -1,8 +1,7 @@
 Ada Pretty Printer Library _(ada-pretty)_
 =========================================
 
-[![Build](https://github.com/reznikmm/ada-pretty/workflows/Build/badge.svg)](https://github.com/reznikmm/ada-pretty/actions)
-[![Copr build status](https://copr.fedorainfracloud.org/coprs/reznik/ada/package/ada-pretty/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/reznik/ada/)
+[![Build](https://github.com/reznikmm/ada-pretty/actions/workflows/alire.yml/badge.svg)](https://github.com/reznikmm/ada-pretty/actions/workflows/alire.yml)
 [![reuse compliant](https://img.shields.io/badge/reuse-compliant-green.svg)](https://reuse.software/)
 
 > Pretty printing library for Ada
@@ -14,16 +13,18 @@ a file.
 
 ## Install
 
-Run
-```
-make all install PREFIX=/path/to/install
+Add the crate via [Alire](https://alire.ada.dev):
+
+```shell
+alr with ada_pretty
 ```
 
 ### Dependencies
 It depends on [Matreshka](https://forge.ada-ru.org/matreshka) library.
 
 ## Usage
-Add `with "ada_pretty";` in your project file.
+Add `ada_pretty` as Alire dependency or
+add `with "ada_pretty";` in your project file.
 
 Example:
 

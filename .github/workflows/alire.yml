@@ -1,0 +1,16 @@
+# SPDX-FileCopyrightText: 2026 Max Reznik <reznikmm@gmail.com>
+#
+# SPDX-License-Identifier: MIT
+
+name: Build with Alire
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: alire-project/setup-alire@v5
+    - name: Build project and demos
+      run: alr build

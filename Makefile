@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 Max Reznik <reznikmm@gmail.com>
+#
+# SPDX-License-Identifier: MIT
+
 GPRBUILD_FLAGS = -p -j0
 PREFIX                 ?= /usr
 GPRDIR                 ?= $(PREFIX)/share/gpr

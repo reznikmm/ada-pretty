@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 Max Reznik <reznikmm@gmail.com>
+#
+# SPDX-License-Identifier: MIT
+
 %undefine _hardened_build
 %define _gprdir %_GNAT_project_dir
 
